@@ -29,7 +29,7 @@ LIMIT 3;
 - Selling amount (price and quantity) of 'Mais do mesmo' album
 
 ```
-SELECT t.name, sum(inv_item.quantity) AS "Total quantity", (inv_item.unitprice * sum(inv_item.quantity)) as "Total price"
+SELECT t.name, sum(inv_item.quantity) AS "Total quantity", (inv_item.unitprice * sum(inv_item.quantity)) AS "Total price"
 FROM tracks t
 LEFT JOIN invoice_items inv_item
 ON t.trackid = inv_item.trackid
@@ -51,6 +51,20 @@ ON inv.customerid = c.customerid
 WHERE strftime('%Y', inv.invoicedate) = '2012'
 GROUP BY e.employeeid
 ORDER BY "Total amount of selling in 2012" DESC;
+```
+
+- Total songs, total songs with MPEG media and the Total with AAC media for each genre
+
+```
+SELECT g.name as "Gênero", COUNT(t.trackid) AS "Total songs", 
+COUNT(CASE WHEN m.name LIKE "%mpeg%" THEN 1 END) AS "Total MPEG media ",
+COUNT(CASE WHEN m.name like "%aac%" THEN 1 END) AS "Total AAC media"
+FROM genres g
+INNER JOIN tracks t
+ON t.genreid = g.genreid
+INNER JOIN media_types m
+ON t.mediatypeid = m.mediatypeid
+GROUP BY g.name
 ```
 
 
