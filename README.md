@@ -26,7 +26,7 @@ ORDER BY count(g.genreid) DESC
 LIMIT 3;
 ```
 
-- Select the selling amount of 'Mais do mesmo' album
+- Selling amount (price and quantity) of 'Mais do mesmo' album
 
 ```
 SELECT t.name, sum(inv_item.quantity) AS "Total quantity", (inv_item.unitprice * sum(inv_item.quantity)) as "Total price"
@@ -39,4 +39,18 @@ WHERE a.title = "Mais Do Mesmo"
 GROUP BY t.name;
 ```
 
--
+- Total selling by salesperson in 2012
+
+```
+SELECT e.firstname, e.lastname, sum(inv.total) AS "Total amount of selling in 2012"
+FROM customers c 
+INNER JOIN employees e
+ON e.employeeid = c.supportrepid 
+INNER JOIN invoices inv
+ON inv.customerid = c.customerid
+WHERE strftime('%Y', inv.invoicedate) = '2012'
+GROUP BY e.employeeid
+ORDER BY "Total amount of selling in 2012" DESC;
+```
+
+
