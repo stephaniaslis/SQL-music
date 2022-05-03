@@ -1,13 +1,27 @@
-## Music in Brazil 
+## :musical_note:	 Music in Brazil 
+
+### Introduction
+
+In this project I made queries from a music database using SQL.
 
 The chinook sample database is a good database for practicing with SQL, especially SQLite. (source:https://www.sqlitetutorial.net/sqlite-sample-database/)
 
-This is the following schema:
-
+This is the following schema and the dictionary:
 
 ![schema_chinook](https://user-images.githubusercontent.com/82055743/166265207-312287ea-22be-4041-8bf2-9b2e72029e6e.png)
 
-Queries:
+image source:https://www.sqlitetutorial.net/sqlite-sample-database/
+
+![dict_music](https://user-images.githubusercontent.com/82055743/166426668-c19e504d-a05f-4374-86ca-3f546d36e3a4.png)
+
+image source:https://www.sqlitetutorial.net/sqlite-sample-database/
+
+
+
+
+
+### Queries:
+
 
 - 3 best selling genres in Brazil
 
@@ -64,7 +78,7 @@ INNER JOIN tracks t
 ON t.genreid = g.genreid
 INNER JOIN media_types m
 ON t.mediatypeid = m.mediatypeid
-GROUP BY g.name
+GROUP BY g.name;
 ```
 
 
